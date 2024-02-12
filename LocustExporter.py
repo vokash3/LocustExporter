@@ -1,5 +1,6 @@
 import json
 import logging
+import os
 import sys
 import time
 import argparse
@@ -111,16 +112,26 @@ if __name__ == '__main__':
     {
         "port": 9191,
         "host": "http://localhost:8089"
-    }'''
+    }\n\n\n If You don't wanna use config file U can use env vars EXPORTER_PORT and LOCUST_HOST'''
 
     parser = argparse.ArgumentParser(description='Locust Exporter for Prometheus')
-    parser.add_argument('--config', help=help, required=True)
+    parser.add_argument('--config', help=help, required=False)
+
     try:
         args = parser.parse_args()
-
-        config = load_config(args.config)
-        port = config.get("port")
-        host = config.get("host")
+        if args.config:
+            config = load_config(args.config)
+            port = config.get("port")
+            host = config.get("host")
+            logger.info(f'''Used CONFIG file:\n
+            {config}\n''')
+        else:
+            port = os.getenv('EXPORTER_PORT', '9191')
+            host = os.getenv('LOCUST_HOST', 'http://localhost:8089')
+            logger.info(f'''Used ENVIRONMENT variables:\n
+            EXPORTER_PORT={port}\n
+            LOCUST_HOST={host}
+            ''')
     except:
         parser.print_help()
 
