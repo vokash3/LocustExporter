@@ -30,10 +30,15 @@ class LocustExporter:
             logger.warning(f"Wrong response from server: {url}")
             return
 
-        yield GaugeMetricFamily('locust_current_response_time_percentile_50', '50 percentile Response Time',
-                                response['current_response_time_percentile_1'])
-        yield GaugeMetricFamily('locust_current_response_time_percentile_95', '95 percentile Response Time',
-                                response['current_response_time_percentile_2'])
+        if 'current_response_time_percentiles' in response:
+            yield GaugeMetricFamily('locust_current_response_time_percentile_95', '95 percentile Response Time',
+                                    response['current_response_time_percentiles']['response_time_percentile_0.95'])
+        else:
+            yield GaugeMetricFamily('locust_current_response_time_percentile_50', '50 percentile Response Time',
+                                    response['current_response_time_percentile_1'])
+            yield GaugeMetricFamily('locust_current_response_time_percentile_95', '95 percentile Response Time',
+                                    response['current_response_time_percentile_2'])
+
         yield GaugeMetricFamily('locust_fail_ratio', 'Current fail ratio', response['fail_ratio'])
 
         gauge = GaugeMetricFamily('locust_state', 'Locust state: spawning, running etc ...')
@@ -84,10 +89,6 @@ class LocustExporter:
                 if stat['name'] != 'Aggregated':
                     metric.add_sample('locust_requests_' + req_metric, value=stat[req_metric],
                                       labels={'name': stat['name'], 'method': stat['method']})
-                else:
-                    if stat['method']:
-                        metric.add_sample('locust_requests_aggregated_' + req_metric, value=stat[req_metric],
-                                          labels={'name': stat['name'], 'method': stat['method']})
             yield metric
 
 
