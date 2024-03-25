@@ -41,6 +41,9 @@ class LocustExporter:
 
         yield GaugeMetricFamily('locust_fail_ratio', 'Current fail ratio', response['fail_ratio'])
 
+        yield GaugeMetricFamily('locust_total_avg_response_time', 'Total avarage response time',
+                                response['total_avg_response_time'])
+
         gauge = GaugeMetricFamily('locust_state', 'Locust state: spawning, running etc ...')
         gauge.add_sample('locust_state', value=1 if response['state'] in ['running', 'spawning', 'cleanup'] else 0,
                          labels={'state': response['state']})
