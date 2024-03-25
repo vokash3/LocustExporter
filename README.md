@@ -6,6 +6,8 @@ Inspired by [ContainerSolutions/locust_exporter](https://github.com/ContainerSol
 
 *This is a [Locust](https://github.com/locustio/locust) exporter for [Prometheus](https://github.com/prometheus/prometheus) made on Python.*
 
+[![Grafana Screen](screens/grafana.png)](https://grafana.com/grafana/dashboards/20462-locust-prometheus-monitoring-modern/)
+
 ## Requirements
 For the best experience of using this exporter you need to be installed:
 1. [Prometheus](https://prometheus.io/download/)
