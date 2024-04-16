@@ -90,7 +90,7 @@ class LocustExporter:
                                            'Locust requests req_metric of ' + req_metric.replace('0.', ''))
             for stat in response['stats']:
                 if stat['name'] != 'Aggregated':
-                    metric.add_sample('locust_requests_' + req_metric, value=stat[req_metric],
+                    metric.add_sample('locust_requests_' + req_metric.replace('0.', ''), value=stat[req_metric],
                                       labels={'name': stat['name'], 'method': stat['method']})
             yield metric
 
