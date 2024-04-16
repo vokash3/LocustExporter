@@ -86,8 +86,8 @@ class LocustExporter:
                 metric = CounterMetricFamily('locust_requests_' + req_metric,
                                              'Locust requests req_metric of ' + req_metric)
             else:
-                metric = GaugeMetricFamily('locust_requests_' + req_metric,
-                                           'Locust requests req_metric of ' + req_metric)
+                metric = GaugeMetricFamily('locust_requests_' + req_metric.replace('0.', ''),
+                                           'Locust requests req_metric of ' + req_metric.replace('0.', ''))
             for stat in response['stats']:
                 if stat['name'] != 'Aggregated':
                     metric.add_sample('locust_requests_' + req_metric, value=stat[req_metric],
