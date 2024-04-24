@@ -1,0 +1,47 @@
+version: '3.8'
+services:
+  prometheus:
+    image: prom/prometheus:v2.51.2
+    volumes:
+      - ./prometheus/config/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-lifecycle'
+    ports:
+      - '9090:9090'
+    networks:
+      - mynet
+
+  grafana:
+    image: grafana/grafana:10.4.2
+    volumes:
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/etc/grafana/provisioning/dashboards/locust.json
+      - GF_AUTH_ANONYMOUS_ENABLED=true # no auth
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin # no auth
+    ports:
+      - '3000:3000'
+    depends_on:
+      - prometheus
+    networks:
+      - mynet
+
+  locust_exporter:
+    image: vokash3/locust_exporter
+    environment:
+      - EXPORTER_PORT=9191
+      # CHANGE THE LOCUST_HOST TO DESIRED ONE
+      # host.docker.internal is for local
+      - LOCUST_HOST=http://host.docker.internal:8089
+    ports:
+      - '9191:9191'
+    networks:
+      - mynet
+
+networks:
+  mynet:
+    driver: bridge

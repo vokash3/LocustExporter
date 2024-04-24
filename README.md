@@ -2,14 +2,18 @@
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/vokash3/locust_exporter.svg)](https://hub.docker.com/r/vokash3/locust_exporter/tags)
 
-Inspired by [ContainerSolutions/locust_exporter](https://github.com/ContainerSolutions/locust_exporter) and [mbolek/locust_exporter](https://github.com/mbolek/locust_exporter)
+Inspired by [ContainerSolutions/locust_exporter](https://github.com/ContainerSolutions/locust_exporter)
+and [mbolek/locust_exporter](https://github.com/mbolek/locust_exporter)
 
-*This is a [Locust](https://github.com/locustio/locust) exporter for [Prometheus](https://github.com/prometheus/prometheus) made on Python.*
+*This is a [Locust](https://github.com/locustio/locust) exporter
+for [Prometheus](https://github.com/prometheus/prometheus) made on Python.*
 
 [![Grafana Screen](screens/grafana.png)](https://grafana.com/grafana/dashboards/20462-locust-prometheus-monitoring-modern/)
 
 ## Requirements
+
 For the best experience of using this exporter you need to be installed:
+
 1. [Prometheus](https://prometheus.io/download/)
 2. [Grafana](https://grafana.com/grafana/download?pg=get&plcmt=selfmanaged-box1-cta1)
 3. [Python 3.10-3.12](https://www.python.org/downloads/)
@@ -34,12 +38,46 @@ For the best experience of using this exporter you need to be installed:
     ```bash
     python3 LocustExporter.py --config config.json
     ```
-4. Use this [Grafana Dashboard](https://grafana.com/grafana/dashboards/20462-locust-prometheus-monitoring-modern/) to watch your Locust.
+4. Use this [Grafana Dashboard](https://grafana.com/grafana/dashboards/20462-locust-prometheus-monitoring-modern/) to
+   watch your Locust.
 
 ## (Alternative) Quick Start With Docker
+
 Complete the first two steps from the previous section (Quick Start) and then use this:
 [Docker Hub](https://hub.docker.com/r/vokash3/locust_exporter) or use ``Dockerfile`` in the root of this project.
 
+## (Alternative) An Extremely Fast Solution [Docker Compose]
 
+If you don't want to worry about anything you really should try out this way!
+
+_First of all, you need docker installed in your system!_
+
+When all is ready follow this steps:
+
+- clone or download this project
+- go to *docker* dir of the project
+   ```bash
+  cd docker
+  ```
+- Using your editor (vim, nano ...) change **LOCUST_HOST** in *locust_exporter* block to desired one
+
+    - if your Locust is up on localhost you don't need to edit this file (pass edit step)
+- run docker compose up (first time)
+   ```bash
+  docker compose up -d
+  ```
+  OR (if U need to rebuild existing containers with new configs)
+   ```bash
+  docker compose up -d --remove-orphans
+  ```
+- ENJOY IT ;-)
+
+### Used ports
+
+- 3000/tcp - grafana
+- 9090/tcp - prometheus
+- 9191/tcp - locust_exporter
+
+*In order to change them, edit configs!*
 
 
