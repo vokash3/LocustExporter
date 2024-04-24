@@ -31,7 +31,7 @@ services:
       - mynet
 
   locust_exporter:
-    image: vokash3/locust_exporter
+    image: vokash3/locust_exporter:latest
     environment:
       - EXPORTER_PORT=9191
       # CHANGE THE LOCUST_HOST TO DESIRED ONE
