@@ -1,5 +1,7 @@
 # Locust Prometheus Exporter
 
+_Compatible with Locust 2.29.1_
+
 [![Docker Pulls](https://img.shields.io/docker/pulls/vokash3/locust_exporter.svg)](https://hub.docker.com/r/vokash3/locust_exporter/tags)
 
 Inspired by [ContainerSolutions/locust_exporter](https://github.com/ContainerSolutions/locust_exporter)
@@ -8,7 +10,7 @@ and [mbolek/locust_exporter](https://github.com/mbolek/locust_exporter)
 *This is a [Locust](https://github.com/locustio/locust) exporter
 for [Prometheus](https://github.com/prometheus/prometheus) made on Python.*
 
-[![Grafana Screen](screens/grafana.png)](https://grafana.com/grafana/dashboards/20462-locust-prometheus-monitoring-modern/)
+[![Grafana Screen](screens/locust_monitoring.png)](https://grafana.com/grafana/dashboards/20462-locust-prometheus-monitoring-modern/)
 
 ## Requirements
 
@@ -59,7 +61,7 @@ When all is ready follow this steps:
    ```bash
   cd docker
   ```
-- Using your editor (vim, nano ...) change **LOCUST_HOST** in *locust_exporter* block to desired one
+- Using your editor (vim, nano ...) change **LOCUST_HOST** in *locust_exporter* block of **docker-compose.yml** to desired one
 
     - if your Locust is up on localhost you don't need to edit this file (pass edit step)
 - run docker compose up (first time)

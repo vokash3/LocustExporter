@@ -14,7 +14,7 @@ services:
       - mynet
 
   grafana:
-    image: grafana/grafana:10.4.2
+    image: grafana/grafana:11.1.1
     volumes:
       - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
       - ./grafana/datasources:/etc/grafana/provisioning/datasources

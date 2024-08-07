@@ -76,8 +76,8 @@ class LocustExporter:
             yield GaugeMetricFamily('locust_workers', 'Locust number of workers', len(response['workers']))
 
         stats = ['avg_content_length', 'avg_response_time', 'current_fail_per_sec', 'current_rps',
-                 'max_response_time', 'median_response_time', 'min_response_time', 'ninetieth_response_time',
-                 'ninety_ninth_response_time', 'num_failures', 'num_requests', 'response_time_percentile_0.95',
+                 'max_response_time', 'median_response_time', 'min_response_time', 'num_failures', 'num_requests',
+                 'response_time_percentile_0.95',
                  'response_time_percentile_0.99']
 
         for req_metric in stats:
