@@ -1,6 +1,6 @@
 # docker build -t locust_exporter .
 # docker run -p 9191:9191 -e EXPORTER_PORT=9191 -e LOCUST_HOST=http://localhost:8080 -v ./:/dir locust_exporter
-FROM python:3.11-slim
+FROM --platform=linux/amd64 python:3.11-slim
 
 RUN pip install prometheus_client requests
 
