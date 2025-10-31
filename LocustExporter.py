@@ -1,33 +1,52 @@
+import argparse
 import json
 import logging
 import os
-import sys
 import time
-import argparse
 
 import requests
 from prometheus_client import start_http_server, REGISTRY
 from prometheus_client.metrics_core import GaugeMetricFamily, CounterMetricFamily
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-logger = logging.getLogger('LocustExporter')
+METRIC_TYPE_MAP = {
+    "gauge": GaugeMetricFamily,
+    "counter": CounterMetricFamily
+}
+
+
+def load_json(path):
+    with open(path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def get_json_value(data, path):
+    for key in path:
+        if isinstance(data, dict):
+            data = data.get(key)
+        else:
+            return None
+        if data is None:
+            return None
+    return data
 
 
 class LocustExporter:
-    def __init__(self, locust_host):
+    def __init__(self, locust_host, metrics_config):
         self._host = locust_host
+        self._metrics = metrics_config
 
     def collect(self):
         url = self._host + '/stats/requests'
         try:
             response = requests.get(url).content.decode('Utf-8')
             response = json.loads(response)
-            logger.info(f"Got metrics from Locust: {url}")
+            logging.info(f"Got metrics from Locust: {url}")
+            logging.debug(f"{json.dumps(response, ensure_ascii=False, indent=4)}")
         except requests.exceptions.ConnectionError:
-            logger.error(f"Failed to connect to Locust: {url}")
+            logging.error(f"Failed to connect to Locust: {url}")
             return
         except json.decoder.JSONDecodeError:
-            logger.warning(f"Wrong response from server: {url}")
+            logging.warning(f"Wrong response from server: {url}")
             return
 
         if 'current_response_time_percentiles' in response:
@@ -98,19 +117,6 @@ class LocustExporter:
             yield metric
 
 
-def load_config(config_file):
-    try:
-        with open(config_file, 'r') as f:
-            config = json.load(f)
-        return config
-    except FileNotFoundError:
-        print(f"Config file '{config_file}' not found.")
-        sys.exit(1)
-    except json.JSONDecodeError:
-        print(f"Invalid JSON format in config file '{config_file}'.")
-        sys.exit(1)
-
-
 if __name__ == '__main__':
 
     help = '''Path to configuration file in json format where \n1) port - where exporter will be available for 
@@ -121,34 +127,30 @@ if __name__ == '__main__':
         "host": "http://localhost:8089"
     }\n\n\n If You don't wanna use config file U can use env vars EXPORTER_PORT and LOCUST_HOST'''
 
-    parser = argparse.ArgumentParser(description='Locust Exporter for Prometheus')
-    parser.add_argument('--config', help=help, required=False)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Locust Prometheus Exporter (Config-driven)")
+    parser.add_argument("--config", help="Path to exporter config (json)")
+    args = parser.parse_args()
 
-    try:
-        args = parser.parse_args()
-        if args.config:
-            config = load_config(args.config)
-            port = config.get("port")
-            host = config.get("host")
-            logger.info(f'''Used CONFIG file:\n
-            {config}\n''')
-        else:
-            port = os.getenv('EXPORTER_PORT', '9191')
-            host = os.getenv('LOCUST_HOST', 'http://localhost:8089')
-            logger.info(f'''Used ENVIRONMENT variables:\n
-            EXPORTER_PORT={port}\n
-            LOCUST_HOST={host}
-            ''')
-    except:
-        parser.print_help()
+    # Чтение основного конфига
+    config_path = args.config or os.getenv("EXPORTER_CONFIG", "config.json")
+    config = load_json(config_path)
+    port = config.get("exporter_port", 9191)
+    host = config.get("locust_host", "http://localhost:8089")
+    metrics_path = config.get("metrics_config", "metrics_config.json")
+    log_level = config.get("log_level", "INFO")
 
-    else:
-        try:
-            logger.info(f"Starting exporter server on {port}/TCP")
-            start_http_server(int(port))
-            logger.info("Connecting to locust on: " + host)
-            REGISTRY.register(LocustExporter(host))
-            while True:
-                time.sleep(1)
-        except KeyboardInterrupt:
-            exit(0)
+    logging.basicConfig(level=getattr(logging, log_level, logging.INFO),
+                        format="%(asctime)s %(levelname)s %(message)s")
+    logging.info(f"Loaded exporter config: {config_path}")
+
+    # Чтение метрик
+    metrics_config = load_json(metrics_path).get("metrics", [])
+    logging.info(f"Loaded metrics config: {metrics_path}")
+
+    logging.info(f"Starting exporter server on {port}/TCP")
+    start_http_server(int(port))
+    logging.info("Connecting to Locust on: " + host)
+    REGISTRY.register(LocustExporter(host, metrics_config))
+    while True:
+        time.sleep(1)

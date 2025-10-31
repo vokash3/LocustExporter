@@ -1,0 +1,178 @@
+{
+  "metrics": [
+    {
+      "json_path": [
+        "current_response_time_percentiles",
+        "response_time_percentile_0.50"
+      ],
+      "type": "gauge",
+      "name": "locust_current_response_time_percentile_50",
+      "desc": "50th percentile response time"
+    },
+    {
+      "json_path": [
+        "current_response_time_percentiles",
+        "response_time_percentile_0.95"
+      ],
+      "type": "gauge",
+      "name": "locust_current_response_time_percentile_95",
+      "desc": "95th percentile response time"
+    },
+    {
+      "json_path": [
+        "current_response_time_percentiles",
+        "response_time_percentile_0.99"
+      ],
+      "type": "gauge",
+      "name": "locust_current_response_time_percentile_99",
+      "desc": "99th percentile response time"
+    },
+    {
+      "json_path": [
+        "fail_ratio"
+      ],
+      "type": "gauge",
+      "name": "locust_fail_ratio",
+      "desc": "Current fail ratio"
+    },
+    {
+      "json_path": [
+        "total_rps"
+      ],
+      "type": "gauge",
+      "name": "locust_total_rps",
+      "desc": "Total requests per second"
+    },
+    {
+      "json_path": [
+        "total_avg_response_time"
+      ],
+      "type": "gauge",
+      "name": "locust_total_avg_response_time",
+      "desc": "Total average response time"
+    },
+    {
+      "json_path": [
+        "user_count"
+      ],
+      "type": "gauge",
+      "name": "locust_user_count",
+      "desc": "Current number of users"
+    },
+    {
+      "json_path": [
+        "state"
+      ],
+      "type": "gauge",
+      "name": "locust_state",
+      "desc": "Locust test state",
+      "labels": [
+        "state"
+      ]
+    },
+    {
+      "json_path": [
+        "total_fail_per_sec"
+      ],
+      "type": "gauge",
+      "name": "locust_total_fail_per_sec",
+      "desc": "Total failures per second"
+    },
+    {
+      "json_path": [
+        "errors"
+      ],
+      "type": "complex_errors",
+      "name": "locust_errors",
+      "desc": "Requests errors by endpoint",
+      "labels": [
+        "name",
+        "method",
+        "error"
+      ],
+      "value_key": "occurrences"
+    },
+    {
+      "json_path": [
+        "workers"
+      ],
+      "type": "complex_workers",
+      "name": "locust_workers",
+      "desc": "Extra info about workers",
+      "labels": [
+        "cpu_usage",
+        "memory_usage",
+        "user_count",
+        "state",
+        "id"
+      ],
+      "value_key": "exists"
+    },
+    {
+      "json_path": [
+        "workers"
+      ],
+      "type": "gauge",
+      "name": "locust_workers_count",
+      "desc": "Number of Locust workers"
+    },
+    {
+      "json_path": [
+        "stats"
+      ],
+      "type": "complex_stats",
+      "name": "locust_stats",
+      "desc": "Individual request stats",
+      "labels": [
+        "name",
+        "method"
+      ],
+      "fields": [
+        {
+          "field": "avg_content_length",
+          "type": "gauge"
+        },
+        {
+          "field": "avg_response_time",
+          "type": "gauge"
+        },
+        {
+          "field": "current_fail_per_sec",
+          "type": "gauge"
+        },
+        {
+          "field": "current_rps",
+          "type": "gauge"
+        },
+        {
+          "field": "max_response_time",
+          "type": "gauge"
+        },
+        {
+          "field": "median_response_time",
+          "type": "gauge"
+        },
+        {
+          "field": "min_response_time",
+          "type": "gauge"
+        },
+        {
+          "field": "num_failures",
+          "type": "counter"
+        },
+        {
+          "field": "num_requests",
+          "type": "counter"
+        },
+        {
+          "field": "response_time_percentile_0.95",
+          "type": "gauge"
+        },
+        {
+          "field": "response_time_percentile_0.99",
+          "type": "gauge"
+        }
+      ]
+    }
+  ]
+}

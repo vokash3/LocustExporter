@@ -1,4 +1,6 @@
 {
-  "port": 9191,
-  "host": "http://localhost:8089"
+  "exporter_port": 9191,
+  "locust_host": "http://localhost:8089",
+  "metrics_config": "metrics_config.json",
+  "log_level": "DEBUG"
 }
