@@ -1,6 +1,6 @@
 # Locust Prometheus Exporter
 
-_Compatible with Locust 2.29.1_
+_Compatible with Locust 2.12.X - 2.42.X_
 
 [![Docker Pulls](https://img.shields.io/docker/pulls/vokash3/locust_exporter.svg)](https://hub.docker.com/r/vokash3/locust_exporter/tags)
 
