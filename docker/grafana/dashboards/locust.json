@@ -2,7 +2,7 @@
   "__inputs": [
     {
       "name": "DS_PROMETHEUS",
-      "label": "prometheus",
+      "label": "Prometheus",
       "description": "",
       "type": "datasource",
       "pluginId": "prometheus",
@@ -123,11 +123,15 @@
                 "value": null
               },
               {
-                "color": "rgba(237, 129, 40, 0.89)",
+                "color": "super-light-red",
                 "value": 0
               },
               {
-                "color": "rgba(50, 172, 45, 0.97)",
+                "color": "light-green",
+                "value": 1
+              },
+              {
+                "color": "green",
                 "value": 2
               }
             ]
@@ -145,19 +149,20 @@
       "id": 1,
       "maxDataPoints": 100,
       "options": {
-        "colorMode": "background",
-        "graphMode": "area",
+        "colorMode": "value",
+        "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "horizontal",
         "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
-            "mean"
+            "last"
           ],
           "fields": "",
           "values": false
         },
         "showPercentChange": false,
+        "text": {},
         "textMode": "name",
         "wideLayout": true
       },
@@ -246,6 +251,7 @@
           "values": false
         },
         "showPercentChange": false,
+        "text": {},
         "textMode": "auto",
         "wideLayout": true
       },
@@ -257,7 +263,9 @@
             "uid": "promloc"
           },
           "editorMode": "code",
+          "exemplar": true,
           "expr": "locust_user_count",
+          "format": "table",
           "hide": false,
           "interval": "",
           "intervalFactor": 2,
@@ -331,6 +339,7 @@
           "values": false
         },
         "showPercentChange": false,
+        "text": {},
         "textMode": "auto",
         "wideLayout": true
       },
@@ -342,8 +351,12 @@
             "uid": "promloc"
           },
           "editorMode": "code",
+          "exemplar": true,
           "expr": "locust_total_rps",
+          "format": "table",
+          "interval": "",
           "intervalFactor": 2,
+          "legendFormat": "",
           "range": true,
           "refId": "A",
           "step": 20
@@ -408,7 +421,9 @@
             "uid": "promloc"
           },
           "editorMode": "code",
+          "exemplar": true,
           "expr": "sum(locust_requests_num_requests{method=~\".+\"})",
+          "format": "table",
           "interval": "",
           "legendFormat": "",
           "range": true,
@@ -475,7 +490,9 @@
             "uid": "promloc"
           },
           "editorMode": "code",
+          "exemplar": true,
           "expr": "locust_fail_ratio",
+          "format": "table",
           "hide": false,
           "interval": "",
           "legendFormat": "",
@@ -561,7 +578,7 @@
           "editorMode": "code",
           "exemplar": false,
           "expr": "locust_workers",
-          "format": "time_series",
+          "format": "table",
           "hide": false,
           "instant": false,
           "interval": "",
@@ -631,7 +648,9 @@
             "uid": "promloc"
           },
           "editorMode": "code",
+          "exemplar": true,
           "expr": "sum(locust_requests_num_failures{method=~\".+\"})",
+          "format": "table",
           "hide": false,
           "interval": "",
           "legendFormat": "",
@@ -653,12 +672,12 @@
             "mode": "thresholds"
           },
           "custom": {
-            "align": "auto",
+            "align": "center",
             "cellOptions": {
               "type": "auto"
             },
-            "inspect": false,
-            "minWidth": 50
+            "filterable": false,
+            "inspect": false
           },
           "mappings": [],
           "thresholds": {
@@ -673,7 +692,8 @@
                 "value": 80
               }
             ]
-          }
+          },
+          "unit": "ms"
         },
         "overrides": [
           {
@@ -711,6 +731,10 @@
               },
               {
                 "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 80
               }
             ]
           },
@@ -734,6 +758,10 @@
               },
               {
                 "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 500
               }
             ]
           },
@@ -750,6 +778,10 @@
               {
                 "id": "unit",
                 "value": "ms"
+              },
+              {
+                "id": "custom.width",
+                "value": 80
               }
             ]
           },
@@ -766,6 +798,10 @@
               {
                 "id": "unit",
                 "value": "none"
+              },
+              {
+                "id": "custom.width",
+                "value": 80
               }
             ]
           },
@@ -782,6 +818,10 @@
               {
                 "id": "unit",
                 "value": "ms"
+              },
+              {
+                "id": "custom.width",
+                "value": 80
               }
             ]
           },
@@ -801,6 +841,10 @@
               },
               {
                 "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 80
               }
             ]
           },
@@ -824,6 +868,10 @@
               },
               {
                 "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 80
               }
             ]
           },
@@ -847,6 +895,10 @@
               },
               {
                 "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 80
               }
             ]
           },
@@ -866,6 +918,10 @@
               },
               {
                 "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 80
               }
             ]
           },
@@ -889,6 +945,10 @@
               },
               {
                 "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 100
               }
             ]
           },
@@ -912,6 +972,10 @@
               },
               {
                 "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 80
               }
             ]
           },
@@ -931,6 +995,10 @@
               },
               {
                 "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 80
               }
             ]
           },
@@ -950,6 +1018,10 @@
               },
               {
                 "id": "custom.align"
+              },
+              {
+                "id": "custom.width",
+                "value": 80
               }
             ]
           },
@@ -973,30 +1045,10 @@
               },
               {
                 "id": "custom.align"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Method"
-            },
-            "properties": [
+              },
               {
                 "id": "custom.width",
-                "value": 85
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "URL"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 317
+                "value": 80
               }
             ]
           },
@@ -1007,12 +1059,16 @@
             },
             "properties": [
               {
+                "id": "unit",
+                "value": "ms"
+              },
+              {
                 "id": "displayName",
                 "value": "95 %ile"
               },
               {
-                "id": "unit",
-                "value": "ms"
+                "id": "custom.width",
+                "value": 80
               }
             ]
           }
@@ -1039,12 +1095,27 @@
         "sortBy": [
           {
             "desc": true,
-            "displayName": "Requests"
+            "displayName": "99 %ile"
           }
         ]
       },
       "pluginVersion": "11.1.1",
       "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "promloc"
+          },
+          "editorMode": "code",
+          "exemplar": false,
+          "expr": "sum(locust_requests_ninetieth_response_time{method=~\".+\"}) by (method, name)",
+          "format": "table",
+          "hide": false,
+          "instant": true,
+          "legendFormat": "",
+          "range": false,
+          "refId": "J"
+        },
         {
           "datasource": {
             "type": "prometheus",
@@ -1071,6 +1142,7 @@
           "format": "table",
           "hide": false,
           "instant": true,
+          "interval": "",
           "legendFormat": "",
           "range": false,
           "refId": "K"
@@ -1218,7 +1290,8 @@
           "id": "organize",
           "options": {
             "excludeByName": {
-              "Time": true
+              "Time": true,
+              "Value #J": true
             },
             "includeByName": {},
             "indexByName": {},
@@ -1249,6 +1322,7 @@
             "fillOpacity": 0,
             "gradientMode": "none",
             "hideFrom": {
+              "graph": false,
               "legend": false,
               "tooltip": false,
               "viz": false
@@ -1325,11 +1399,11 @@
           "showLegend": true
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "11.3.0",
       "targets": [
         {
           "datasource": {
@@ -1396,22 +1470,20 @@
             "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
-            "axisLabel": "Users",
+            "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
             "hideFrom": {
+              "graph": false,
               "legend": false,
               "tooltip": false,
               "viz": false
             },
             "insertNulls": false,
             "lineInterpolation": "linear",
-            "lineStyle": {
-              "fill": "solid"
-            },
             "lineWidth": 1,
             "pointSize": 5,
             "scaleDistribution": {
@@ -1427,7 +1499,6 @@
               "mode": "off"
             }
           },
-          "fieldMinMax": false,
           "links": [],
           "mappings": [],
           "thresholds": {
@@ -1451,30 +1522,6 @@
               {
                 "id": "custom.fillOpacity",
                 "value": 0
-              },
-              {
-                "id": "custom.axisPlacement",
-                "value": "left"
-              },
-              {
-                "id": "custom.lineWidth",
-                "value": 5
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Current RPS"
-            },
-            "properties": [
-              {
-                "id": "custom.axisPlacement",
-                "value": "right"
-              },
-              {
-                "id": "custom.axisLabel",
-                "value": "RPS"
               }
             ]
           }
@@ -1494,15 +1541,15 @@
             "lastNotNull"
           ],
           "displayMode": "table",
-          "placement": "right",
+          "placement": "bottom",
           "showLegend": true
         },
         "tooltip": {
-          "mode": "multi",
+          "mode": "single",
           "sort": "none"
         }
       },
-      "pluginVersion": "10.3.1",
+      "pluginVersion": "11.3.0",
       "targets": [
         {
           "datasource": {
@@ -1569,6 +1616,7 @@
                 "fillOpacity": 0,
                 "gradientMode": "none",
                 "hideFrom": {
+                  "graph": false,
                   "legend": false,
                   "tooltip": false,
                   "viz": false
@@ -1607,7 +1655,7 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 2
+            "y": 39
           },
           "id": 22,
           "options": {
@@ -1617,7 +1665,7 @@
                 "last"
               ],
               "displayMode": "table",
-              "placement": "right",
+              "placement": "bottom",
               "showLegend": true,
               "sortBy": "Max",
               "sortDesc": true
@@ -1627,6 +1675,7 @@
               "sort": "none"
             }
           },
+          "pluginVersion": "11.3.0",
           "targets": [
             {
               "datasource": {
@@ -1664,6 +1713,7 @@
                 "cellOptions": {
                   "type": "auto"
                 },
+                "filterable": false,
                 "inspect": false
               },
               "decimals": 2,
@@ -1712,7 +1762,7 @@
                   },
                   {
                     "id": "unit",
-                    "value": "none"
+                    "value": "string"
                   },
                   {
                     "id": "custom.align"
@@ -1743,6 +1793,10 @@
                   },
                   {
                     "id": "custom.align"
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 80
                   }
                 ]
               },
@@ -1766,6 +1820,10 @@
                   },
                   {
                     "id": "custom.align"
+                  },
+                  {
+                    "id": "custom.width",
+                    "value": 500
                   }
                 ]
               },
@@ -1822,7 +1880,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 9
+            "y": 46
           },
           "id": 16,
           "options": {
@@ -1837,12 +1895,7 @@
               "show": false
             },
             "showHeader": true,
-            "sortBy": [
-              {
-                "desc": true,
-                "displayName": "Requests"
-              }
-            ]
+            "sortBy": []
           },
           "pluginVersion": "11.1.1",
           "targets": [
@@ -1924,6 +1977,7 @@
                 "fillOpacity": 10,
                 "gradientMode": "none",
                 "hideFrom": {
+                  "graph": false,
                   "legend": false,
                   "tooltip": false,
                   "viz": false
@@ -1963,56 +2017,30 @@
               },
               "unit": "ms"
             },
-            "overrides": [
-              {
-                "__systemRef": "hideSeriesFrom",
-                "matcher": {
-                  "id": "byNames",
-                  "options": {
-                    "mode": "exclude",
-                    "names": [
-                      "Total Average"
-                    ],
-                    "prefix": "All except:",
-                    "readOnly": true
-                  }
-                },
-                "properties": [
-                  {
-                    "id": "custom.hideFrom",
-                    "value": {
-                      "legend": false,
-                      "tooltip": false,
-                      "viz": true
-                    }
-                  }
-                ]
-              }
-            ]
+            "overrides": []
           },
           "gridPos": {
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 3
+            "y": 40
           },
           "id": 15,
-          "interval": "",
           "options": {
             "legend": {
               "calcs": [
                 "last"
               ],
               "displayMode": "table",
-              "placement": "right",
+              "placement": "bottom",
               "showLegend": true
             },
             "tooltip": {
-              "mode": "multi",
+              "mode": "single",
               "sort": "none"
             }
           },
-          "pluginVersion": "10.3.1",
+          "pluginVersion": "11.3.0",
           "targets": [
             {
               "datasource": {
@@ -2020,7 +2048,8 @@
                 "uid": "promloc"
               },
               "editorMode": "code",
-              "expr": "locust_current_response_time_percentile_50",
+              "exemplar": true,
+              "expr": "max(locust_requests_median_response_time)",
               "interval": "",
               "legendFormat": "P50",
               "range": true,
@@ -2084,7 +2113,7 @@
               "refId": "B"
             }
           ],
-          "title": "Response Times (windowed)",
+          "title": "Response Times",
           "type": "timeseries"
         },
         {
@@ -2108,6 +2137,7 @@
                 "fillOpacity": 0,
                 "gradientMode": "none",
                 "hideFrom": {
+                  "graph": false,
                   "legend": false,
                   "tooltip": false,
                   "viz": false
@@ -2142,38 +2172,13 @@
               },
               "unit": "ms"
             },
-            "overrides": [
-              {
-                "__systemRef": "hideSeriesFrom",
-                "matcher": {
-                  "id": "byNames",
-                  "options": {
-                    "mode": "exclude",
-                    "names": [
-                      "AVG MAX"
-                    ],
-                    "prefix": "All except:",
-                    "readOnly": true
-                  }
-                },
-                "properties": [
-                  {
-                    "id": "custom.hideFrom",
-                    "value": {
-                      "legend": false,
-                      "tooltip": false,
-                      "viz": true
-                    }
-                  }
-                ]
-              }
-            ]
+            "overrides": []
           },
           "gridPos": {
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 11
+            "y": 48
           },
           "id": 6,
           "options": {
@@ -2182,15 +2187,15 @@
                 "last"
               ],
               "displayMode": "table",
-              "placement": "right",
+              "placement": "bottom",
               "showLegend": true
             },
             "tooltip": {
-              "mode": "multi",
+              "mode": "single",
               "sort": "none"
             }
           },
-          "pluginVersion": "10.3.1",
+          "pluginVersion": "11.3.0",
           "targets": [
             {
               "datasource": {
@@ -2198,9 +2203,11 @@
                 "uid": "promloc"
               },
               "editorMode": "code",
+              "exemplar": true,
               "expr": "avg(locust_requests_max_response_time{method=~\".+\"})",
               "hide": false,
-              "intervalFactor": 2,
+              "interval": "",
+              "intervalFactor": 1,
               "legendFormat": "AVG MAX",
               "range": true,
               "refId": "A",
@@ -2212,8 +2219,10 @@
                 "uid": "promloc"
               },
               "editorMode": "code",
+              "exemplar": true,
               "expr": "avg(locust_requests_min_response_time{method=~\".+\"})",
-              "intervalFactor": 2,
+              "interval": "",
+              "intervalFactor": 1,
               "legendFormat": "AVG MIN",
               "metric": "",
               "range": true,
@@ -2244,9 +2253,11 @@
                 "uid": "promloc"
               },
               "editorMode": "code",
+              "exemplar": true,
               "expr": "avg(locust_requests_median_response_time{method=~\".+\"})",
               "hide": false,
-              "intervalFactor": 2,
+              "interval": "",
+              "intervalFactor": 1,
               "legendFormat": "AVG MEDIAN",
               "range": true,
               "refId": "D",
@@ -2277,6 +2288,7 @@
                 "fillOpacity": 0,
                 "gradientMode": "none",
                 "hideFrom": {
+                  "graph": false,
                   "legend": false,
                   "tooltip": false,
                   "viz": false
@@ -2317,7 +2329,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 19
+            "y": 56
           },
           "id": 27,
           "options": {
@@ -2327,17 +2339,17 @@
                 "last"
               ],
               "displayMode": "table",
-              "placement": "right",
+              "placement": "bottom",
               "showLegend": true,
               "sortBy": "Max",
               "sortDesc": true
             },
             "tooltip": {
-              "mode": "multi",
+              "mode": "single",
               "sort": "none"
             }
           },
-          "pluginVersion": "10.3.1",
+          "pluginVersion": "11.3.0",
           "targets": [
             {
               "datasource": {
@@ -2345,9 +2357,11 @@
                 "uid": "promloc"
               },
               "editorMode": "code",
+              "exemplar": true,
               "expr": "locust_requests_avg_response_time{method=~\".+\"}",
               "hide": false,
-              "intervalFactor": 2,
+              "interval": "",
+              "intervalFactor": 1,
               "legendFormat": "{{method}} - {{name}}",
               "range": true,
               "refId": "A",
@@ -2378,6 +2392,7 @@
                 "fillOpacity": 0,
                 "gradientMode": "none",
                 "hideFrom": {
+                  "graph": false,
                   "legend": false,
                   "tooltip": false,
                   "viz": false
@@ -2418,7 +2433,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 27
+            "y": 64
           },
           "id": 29,
           "options": {
@@ -2429,17 +2444,17 @@
                 "last"
               ],
               "displayMode": "table",
-              "placement": "right",
+              "placement": "bottom",
               "showLegend": true,
               "sortBy": "Max",
               "sortDesc": true
             },
             "tooltip": {
-              "mode": "multi",
+              "mode": "single",
               "sort": "none"
             }
           },
-          "pluginVersion": "10.3.1",
+          "pluginVersion": "11.3.0",
           "targets": [
             {
               "datasource": {
@@ -2447,16 +2462,18 @@
                 "uid": "promloc"
               },
               "editorMode": "code",
+              "exemplar": true,
               "expr": "locust_requests_median_response_time{method=~\".+\"}",
               "hide": false,
-              "intervalFactor": 2,
+              "interval": "",
+              "intervalFactor": 1,
               "legendFormat": "{{method}} - {{name}}",
               "range": true,
               "refId": "A",
               "step": 2
             }
           ],
-          "title": "Median (window)",
+          "title": "50 %ile (window)",
           "type": "timeseries"
         },
         {
@@ -2480,6 +2497,7 @@
                 "fillOpacity": 0,
                 "gradientMode": "none",
                 "hideFrom": {
+                  "graph": false,
                   "legend": false,
                   "tooltip": false,
                   "viz": false
@@ -2498,7 +2516,7 @@
                   "mode": "none"
                 },
                 "thresholdsStyle": {
-                  "mode": "off"
+                  "mode": "line+area"
                 }
               },
               "links": [],
@@ -2509,6 +2527,10 @@
                   {
                     "color": "green",
                     "value": null
+                  },
+                  {
+                    "color": "red",
+                    "value": 4000
                   }
                 ]
               },
@@ -2520,7 +2542,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 35
+            "y": 72
           },
           "id": 32,
           "options": {
@@ -2531,17 +2553,17 @@
                 "last"
               ],
               "displayMode": "table",
-              "placement": "right",
+              "placement": "bottom",
               "showLegend": true,
-              "sortBy": "Max",
+              "sortBy": "Last",
               "sortDesc": true
             },
             "tooltip": {
-              "mode": "multi",
+              "mode": "single",
               "sort": "none"
             }
           },
-          "pluginVersion": "10.3.1",
+          "pluginVersion": "11.3.0",
           "targets": [
             {
               "datasource": {
@@ -2549,9 +2571,11 @@
                 "uid": "promloc"
               },
               "editorMode": "code",
+              "exemplar": true,
               "expr": "locust_requests_response_time_percentile_95{method=~\".+\"}",
               "hide": false,
-              "intervalFactor": 2,
+              "interval": "",
+              "intervalFactor": 1,
               "legendFormat": "{{method}} - {{name}}",
               "range": true,
               "refId": "A",
@@ -2582,6 +2606,7 @@
                 "fillOpacity": 0,
                 "gradientMode": "none",
                 "hideFrom": {
+                  "graph": false,
                   "legend": false,
                   "tooltip": false,
                   "viz": false
@@ -2622,7 +2647,7 @@
             "h": 8,
             "w": 24,
             "x": 0,
-            "y": 43
+            "y": 80
           },
           "id": 28,
           "options": {
@@ -2633,17 +2658,17 @@
                 "last"
               ],
               "displayMode": "table",
-              "placement": "right",
+              "placement": "bottom",
               "showLegend": true,
               "sortBy": "Max",
               "sortDesc": true
             },
             "tooltip": {
-              "mode": "multi",
+              "mode": "single",
               "sort": "none"
             }
           },
-          "pluginVersion": "10.3.1",
+          "pluginVersion": "11.3.0",
           "targets": [
             {
               "datasource": {
@@ -2651,9 +2676,11 @@
                 "uid": "promloc"
               },
               "editorMode": "code",
+              "exemplar": true,
               "expr": "locust_requests_response_time_percentile_99{method=~\".+\"}",
               "hide": false,
-              "intervalFactor": 2,
+              "interval": "",
+              "intervalFactor": 1,
               "legendFormat": "{{method}} - {{name}}",
               "range": true,
               "refId": "A",
@@ -2698,6 +2725,7 @@
                 "fillOpacity": 10,
                 "gradientMode": "none",
                 "hideFrom": {
+                  "graph": false,
                   "legend": false,
                   "tooltip": false,
                   "viz": false
@@ -2738,7 +2766,7 @@
             "h": 8,
             "w": 12,
             "x": 0,
-            "y": 4
+            "y": 41
           },
           "id": 9,
           "options": {
@@ -2751,11 +2779,11 @@
               "showLegend": true
             },
             "tooltip": {
-              "mode": "multi",
+              "mode": "single",
               "sort": "none"
             }
           },
-          "pluginVersion": "10.3.1",
+          "pluginVersion": "11.3.0",
           "targets": [
             {
               "datasource": {
@@ -2799,6 +2827,7 @@
                 "fillOpacity": 40,
                 "gradientMode": "opacity",
                 "hideFrom": {
+                  "graph": false,
                   "legend": false,
                   "tooltip": false,
                   "viz": false
@@ -2857,10 +2886,9 @@
             "h": 8,
             "w": 12,
             "x": 12,
-            "y": 4
+            "y": 41
           },
           "id": 12,
-          "interval": "",
           "options": {
             "legend": {
               "calcs": [
@@ -2871,11 +2899,11 @@
               "showLegend": true
             },
             "tooltip": {
-              "mode": "multi",
+              "mode": "single",
               "sort": "none"
             }
           },
-          "pluginVersion": "10.3.1",
+          "pluginVersion": "11.3.0",
           "targets": [
             {
               "datasource": {
@@ -2913,9 +2941,9 @@
                 "cellOptions": {
                   "type": "auto"
                 },
+                "filterable": false,
                 "inspect": false
               },
-              "fieldMinMax": false,
               "mappings": [],
               "thresholds": {
                 "mode": "absolute",
@@ -2935,54 +2963,12 @@
               {
                 "matcher": {
                   "id": "byName",
-                  "options": "Time"
-                },
-                "properties": [
-                  {
-                    "id": "custom.hidden",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "__name__"
-                },
-                "properties": [
-                  {
-                    "id": "custom.hidden",
-                    "value": true
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
                   "options": "cpu_usage"
                 },
                 "properties": [
                   {
-                    "id": "custom.cellOptions",
-                    "value": {
-                      "type": "gauge"
-                    }
-                  },
-                  {
                     "id": "unit",
                     "value": "percent"
-                  }
-                ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "job"
-                },
-                "properties": [
-                  {
-                    "id": "custom.hidden",
-                    "value": true
                   }
                 ]
               },
@@ -3021,18 +3007,6 @@
                     "value": "none"
                   }
                 ]
-              },
-              {
-                "matcher": {
-                  "id": "byName",
-                  "options": "Value"
-                },
-                "properties": [
-                  {
-                    "id": "custom.hidden",
-                    "value": true
-                  }
-                ]
               }
             ]
           },
@@ -3040,10 +3014,9 @@
             "h": 7,
             "w": 24,
             "x": 0,
-            "y": 12
+            "y": 49
           },
           "id": 30,
-          "interval": "",
           "options": {
             "cellHeight": "sm",
             "footer": {
@@ -3083,7 +3056,7 @@
       "type": "row"
     }
   ],
-  "refresh": "",
+  "refresh": "30s",
   "schemaVersion": 39,
   "tags": [
     "locust",
@@ -3093,37 +3066,13 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-5m",
     "to": "now"
   },
-  "timepicker": {
-    "refresh_intervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
-      "1d"
-    ],
-    "time_options": [
-      "5m",
-      "15m",
-      "1h",
-      "6h",
-      "12h",
-      "24h",
-      "2d",
-      "7d",
-      "30d"
-    ]
-  },
+  "timepicker": {},
   "timezone": "browser",
-  "title": "Locust Prometheus Monitoring Modern",
+  "title": "Locust Prometheus Monitoring Modern 2025",
   "uid": "120224",
-  "version": 4,
+  "version": 2,
   "weekStart": ""
 }
